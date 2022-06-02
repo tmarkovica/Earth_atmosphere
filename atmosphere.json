@@ -1,0 +1,113 @@
+[
+    {
+        "name": "Troposphere",
+        "innerRadius": 100,
+        "outerRadius": 170,
+        "color": "#A2D7EE",
+        "distance from earth": {
+            "innerRadius": 0,
+            "outerRadius": 12
+        },
+        "meaning": {
+            "word": "TROPOS",
+            "translation": "means change",
+            "explanation": "Wheather is constantly changing and mixing up the gases in this part of atmosphere"
+        },
+        "facts": [
+            "Closest to Earth's surface",
+            "99% of all atmosphere's water vapor is found in troposphere and it froms clouds and rain",
+            "Contains about 75% of all air mass in atmosphere",
+            "The most dense layer of the atmosphere because of gravity"            
+        ],
+        "featureImagePath": "images/hot-air-ballon.png"
+    },
+    {
+        "name": "Stratosphere",
+        "innerRadius": 170,
+        "outerRadius": 240,
+        "color": "#7DD2F7",
+        "distance from earth": {
+            "innerRadius": 12,
+            "outerRadius": 50
+        },
+        "meaning": {
+            "word": "STRATO",
+            "translation": "means layer",
+            "explanation": "Contains it's own set of layers"
+        },
+        "facts": [
+            "Contains a thin layer of ozone (O3) mecules",
+            "Ozone forms a protective layer and absorbs harmful ultraviolet (UV) radiation from the Sun",
+            "Because ozone layer absorbs so much radiation it actually warms this atmosphere layer",
+            "Stratosphere is very dry and contains fewer clouds"
+            
+        ],
+        "featureImagePath": "images/aeroplane.png"
+    },
+    {
+        "name": "Mesosphere",
+        "innerRadius": 240,
+        "outerRadius": 310,
+        "color": "#3EBCF4",
+        "distance from earth": {
+            "innerRadius": 50,
+            "outerRadius": 80
+        },
+        "meaning": {
+            "word": "MESO",
+            "translation": "means middle",
+            "explanation": "Located in the middle"
+        },
+        "facts": [
+            "There are fewer air molecules to absorb incoming electromagnetic radiation from the Sun",
+            "Most meteors burn up in this atmospheric layer",
+            "When they cross the Mesophere, friction with molecules causes the meteor to burn up",
+            "Air preassure at the bottom of this layer is below 1% of preassure at the sea level"
+        ],
+        "featureImagePath": "images/meteor.png"
+    },
+    {
+        "name": "Termosphere",
+        "innerRadius": 310,
+        "outerRadius": 380,
+        "color": "#247294",
+        "distance from earth": {
+            "innerRadius": 80,
+            "outerRadius": 700
+        },
+        "meaning": {
+            "word": "TERMO",
+            "translation": "means heat",
+            "explanation": "The warmest layer"
+        },
+        "facts": [
+            "Only the lightest gases, mostly oxygen, helium and hydrogen are found here",
+            "The aurora (Northern and Southern Lights) occurs in this layer",
+            "Density of molecules is so low that one gas molecule can go about 1 km before it collides with another molecule",
+            "It actually wouldn't feel hot to humans because molecules are so far apart"
+        ],
+        "featureImagePath": "images/aurora.png"
+    },
+    {
+        "name": "Exosphere",
+        "innerRadius": 380,
+        "outerRadius": 450,
+        "color": "#364471",
+        "distance from earth": {
+            "innerRadius": 700,
+            "outerRadius": 10000
+        },
+        "meaning": {
+            "word": "EXO",
+            "translation": "means outside",
+            "explanation": "The outermost layer of Earth's atmosphere"
+        },
+        "facts": [
+            "In this layer, atoms and molecules escape into space",
+            "Exosphere is nearly a vacuum",
+            "Fewer and fewer molecules with altitude",
+            "Merges with outer space - there is no clear boundary"
+        ],
+        "featureImagePath": "images/sattelite.png"
+    }
+]

@@ -1,0 +1,41 @@
+body {
+    background-color: #252527;  
+}
+
+#layerName {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+#layerNameMeaning {
+    font-style: italic;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 930px auto;
+}
+
+#grid-item-data {
+    display: grid;
+    grid-template-rows: min-content min-content min-content min-content min-content
+                        min-content min-content min-content min-content min-content
+                        min-content min-content min-content min-content min-content;
+    padding-left: 50px;
+}
+
+.whiteText {
+    font-size: large;
+    color: white;
+}
+
+.removeMargin {
+    margin: 0px;
+}
+
+.axisLabel {
+    stroke-width: 0px;
+    fill: white;
+    font-size: large;
+}
