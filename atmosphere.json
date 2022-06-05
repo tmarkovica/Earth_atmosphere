@@ -10,14 +10,14 @@
         },
         "meaning": {
             "word": "TROPOS",
-            "translation": "means change",
-            "explanation": "Wheather is constantly changing and mixing up the gases in this part of atmosphere"
+            "translation": "means change.",
+            "explanation": "Wheather is constantly changing and mixing up the gases in this part of atmosphere."
         },
         "facts": [
             "Closest to Earth's surface",
-            "99% of all atmosphere's water vapor is found in troposphere and it froms clouds and rain",
-            "Contains about 75% of all air mass in atmosphere",
-            "The most dense layer of the atmosphere because of gravity"            
+            "99% of all atmosphere's water vapor is found in troposphere and it froms clouds and rain.",
+            "Contains about 75% of all air mass in atmosphere.",
+            "The most dense layer of the atmosphere because of gravity."            
         ],
         "featureImagePath": "images/hot-air-ballon.png"
     },
@@ -33,13 +33,13 @@
         "meaning": {
             "word": "STRATO",
             "translation": "means layer",
-            "explanation": "Contains it's own set of layers"
+            "explanation": "Contains it's own set of layers."
         },
         "facts": [
-            "Contains a thin layer of ozone (O3) mecules",
-            "Ozone forms a protective layer and absorbs harmful ultraviolet (UV) radiation from the Sun",
-            "Because ozone layer absorbs so much radiation it actually warms this atmosphere layer",
-            "Stratosphere is very dry and contains fewer clouds"
+            "Contains a thin layer of ozone (O3) mecules.",
+            "Ozone forms a protective layer and absorbs harmful ultraviolet (UV) radiation from the Sun.",
+            "Because ozone layer absorbs so much radiation it actually warms this atmosphere layer.",
+            "Stratosphere is very dry and contains fewer clouds."
             
         ],
         "featureImagePath": "images/aeroplane.png"
@@ -56,7 +56,7 @@
         "meaning": {
             "word": "MESO",
             "translation": "means middle",
-            "explanation": "Located in the middle"
+            "explanation": "Located in the middle."
         },
         "facts": [
             "There are fewer air molecules to absorb incoming electromagnetic radiation from the Sun",
@@ -78,13 +78,13 @@
         "meaning": {
             "word": "TERMO",
             "translation": "means heat",
-            "explanation": "The warmest layer"
+            "explanation": "The warmest layer."
         },
         "facts": [
-            "Only the lightest gases, mostly oxygen, helium and hydrogen are found here",
-            "The aurora (Northern and Southern Lights) occurs in this layer",
-            "Density of molecules is so low that one gas molecule can go about 1 km before it collides with another molecule",
-            "It actually wouldn't feel hot to humans because molecules are so far apart"
+            "Only the lightest gases, mostly oxygen, helium and hydrogen are found here.",
+            "The aurora (Northern and Southern Lights) occurs in this layer.",
+            "Density of molecules is so low that one gas molecule can go about 1 km before it collides with another molecule.",
+            "It actually wouldn't feel hot to humans because molecules are so far apart."
         ],
         "featureImagePath": "images/aurora.png"
     },
@@ -100,13 +100,13 @@
         "meaning": {
             "word": "EXO",
             "translation": "means outside",
-            "explanation": "The outermost layer of Earth's atmosphere"
+            "explanation": "The outermost layer of Earth's atmosphere."
         },
         "facts": [
-            "In this layer, atoms and molecules escape into space",
-            "Exosphere is nearly a vacuum",
-            "Fewer and fewer molecules with altitude",
-            "Merges with outer space - there is no clear boundary"
+            "In this layer, atoms and molecules escape into space.",
+            "Exosphere is nearly a vacuum.",
+            "Fewer and fewer molecules with altitude.",
+            "Merges with outer space - there is no clear boundary."
         ],
         "featureImagePath": "images/sattelite.png"
     }

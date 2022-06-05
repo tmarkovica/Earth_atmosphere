@@ -14,6 +14,10 @@ var div_my_dataviz;
 
 var atmosphereJson = {};
 
+var previousGraphPositionY = 430;
+var previousLayerHeight = 0;
+var previousLayerIndex = 0;
+
 
 getJsonFromFile("atmosphere.json")
     .then(responseJson => {
@@ -37,8 +41,9 @@ function appendDivToDivGridItemData(idName) {
 function startDrawingAtmosphere() {
     divGridItem_Data = d3.selectAll("body").select(".grid-container").select("#grid-item-data");
     
-    divData = appendDivToDivGridItemData("data");
     div_my_dataviz = appendDivToDivGridItemData("my_dataviz");
+    divData = appendDivToDivGridItemData("data"); 
+    divData.style("opacity", "0");
 
     svg_animation = createSvgElement();
     createEarthImage();
@@ -75,7 +80,7 @@ function addAtmosphereLayers() {
             return d.name;
         })
         .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")")
-        .attr("d", function (d) {
+        .attr("d", function (d, i) {
             var sphere = createD3ArcForLayer(d.innerRadius, d.outerRadius);
 
             svg_animation.select("#" + d.name)
@@ -83,17 +88,20 @@ function addAtmosphereLayers() {
                 .attr("d", sphere)
                 .attr("fill", d.color)
                 .on("mouseover", function (e, d) {
-                    showDataForThisLayer(d);
+                    showDataForThisLayer(d); 
+                    setLayerAsLastChildInSVGSoItCanExpandOverOtherArcs(d);                   
                     transition_SwitchDefaultSphereWithLargeSphere(d);
                     addLayerFeatureImagesToLayer(d);
-                    highlightLayerSpanOnGraph(d);
+                    
+                    //highlightLayerSpanOnGraph(d);
+                    //highlightLayerSpanOnGraph_translateFromBelow(d);
+                    highlightLayerSpanOnGraph_translateFromLastHighlightedPosition(d,i);
+
                 })
                 .on("mouseout", function () {
                     transition_SetLayerToItsDefaultSize(d, sphere);
-                    setLayerAsLastChildInSVGSoItCanExpandOverOtherArcs(d);
                     removeTextFrom_grid_item_data();
                     removeRotatingIcons();
-
                     removeHighlightedLayerSpanOnGraph();
                 });
         });
@@ -134,6 +142,7 @@ function transition_SwitchDefaultSphereWithLargeSphere(layer) {
 }
 
 function removeTextFrom_grid_item_data() {
+    fadeOutDivData();
     document.getElementById("data").innerHTML = "";
 }
 
@@ -195,6 +204,7 @@ function showDataForThisLayer(layer) {
     showLayerNameMeaning(layer);
     showDistanceFromEarth(layer);
     showLayerFacts(layer);
+    fadeInDataDiv();
 }
 
 function plotTemperatureGraph() {
@@ -299,30 +309,114 @@ function plotTemperatureGraph() {
 }
 
 function highlightLayerSpanOnGraph(layer) {
-    const graphWidth = divGridItem_Data.node().getBoundingClientRect().width - 70 - 120;
-    const graphHeight = 430;
-    const maxDistance = 140;
+    const graphWidth_px = divGridItem_Data.node().getBoundingClientRect().width - 70 - 120;
+    const graphHeight_px = 430;
+    const maxDistance_km = 140;
 
-    const innerRadius_kilometers = layer["distance from earth"].innerRadius;
-    const outerRadius_kilometers = layer["distance from earth"].outerRadius;
-    const layerHeight_kilometers = layer["distance from earth"].outerRadius - layer["distance from earth"].innerRadius;
+    const innerRadius_km = layer["distance from earth"].innerRadius;
+    const outerRadius_km = layer["distance from earth"].outerRadius;
+    const layerHeight_km = outerRadius_km - innerRadius_km;
 
-    var height = 0;
-    if (layer["distance from earth"].outerRadius >= 140)
-        height = 430;
+    var layerHeight_px = 0;
+    if (outerRadius_km >= 140)
+        layerHeight_px = 430;
     else
-        height = layerHeight_kilometers / maxDistance * graphHeight;
+        layerHeight_px = layerHeight_km / maxDistance_km * graphHeight_px;
 
-    console.log("real height ", outerRadius_kilometers - innerRadius_kilometers);
-    console.log(height);
+    var y = graphHeight_px - layerHeight_px - innerRadius_km / maxDistance_km * graphHeight_px;
 
     svg_graph.append("rect")
         .attr("id", "layerSpan")
-        .attr("y", graphHeight - height - innerRadius_kilometers / maxDistance * graphHeight)
-        .attr("width", graphWidth)
-        .attr("height", height)
+        .attr("y", y)
+        .attr("width", graphWidth_px)
+        .attr("height", layerHeight_px)
         .attr("fill", "green")
+        .attr("opacity", "0.2")
+        .transition()
+        .delay(100)
+        .duration(600)
         .attr("opacity", "0.1");
+
+        console.log("dfskfdjsldfasj");
+}
+
+function highlightLayerSpanOnGraph_translateFromBelow(layer) {
+    const graphWidth_px = divGridItem_Data.node().getBoundingClientRect().width - 70 - 120;
+    const graphHeight_px = 430;
+    const maxDistance_km = 140;
+
+    const innerRadius_km = layer["distance from earth"].innerRadius;
+    const outerRadius_km = layer["distance from earth"].outerRadius;
+    const layerHeight_km = outerRadius_km - innerRadius_km;
+
+    var layerHeight_px = 0;
+    if (outerRadius_km >= 140)
+        layerHeight_px = 430;
+    else
+        layerHeight_px = layerHeight_km / maxDistance_km * graphHeight_px;
+
+    var y = graphHeight_px - layerHeight_px - innerRadius_km / maxDistance_km * graphHeight_px;
+
+    previousGraph = svg_graph.append("rect")
+        .attr("id", "layerSpan")
+        .attr("y", graphHeight_px)
+        .attr("width", graphWidth_px)
+        .attr("height", layerHeight_px)
+        .attr("fill", "green")
+        .attr("opacity", "0.2")
+        .transition()
+        .delay(100)
+        .duration(600)
+        .attr("opacity", "0.1")
+        .attr("transform", "translate(0," + (-1 * layerHeight_px - innerRadius_km / maxDistance_km * graphHeight_px) +")");
+}
+
+function highlightLayerSpanOnGraph_translateFromLastHighlightedPosition(layer, layerIndex) {
+    const graphWidth_px = divGridItem_Data.node().getBoundingClientRect().width - 70 - 120;
+    const graphHeight_px = 430;
+    const maxDistance_km = 140;
+
+    const innerRadius_km = layer["distance from earth"].innerRadius;
+    const outerRadius_km = layer["distance from earth"].outerRadius;
+    const layerHeight_km = outerRadius_km - innerRadius_km;
+
+    var layerHeight_px = 0;
+    if (outerRadius_km >= 140)
+        layerHeight_px = 430;
+    else
+        layerHeight_px = layerHeight_km / maxDistance_km * graphHeight_px;
+
+    var y = graphHeight_px - layerHeight_px - innerRadius_km / maxDistance_km * graphHeight_px;
+
+    const yDirectionSlideCoefficient = layerIndex >= previousLayerIndex ? -1 : 1;
+    var ySlide_px = yDirectionSlideCoefficient * layerHeight_px;
+   
+    if (layerIndex >= previousLayerIndex) {
+        ySlide_px = -1 * layerHeight_px;
+        y += layerHeight_px;
+    }
+    else {
+        ySlide_px = previousLayerHeight;
+        y -= previousLayerHeight;
+    }
+
+    // transition from last layer position
+    svg_graph.append("rect")
+        .attr("id", "layerSpan")
+        .attr("y", y)
+        .attr("width", graphWidth_px) 
+        .attr("height", previousLayerHeight)
+        .attr("fill", "green")
+        .attr("opacity", "0.2")
+        .transition()
+        .delay(100)
+        .duration(1000)
+        .attr("opacity", "0.1")
+        .attr("transform", "translate(0," + ySlide_px +")")
+        .attr("height", layerHeight_px);
+
+    previousLayerHeight = layerHeight_px;
+    previousLayerIndex = layerIndex;
 }
 
 function addLayerFeatureImagesToLayer(layer) {
@@ -370,4 +464,19 @@ function addIconToSphereArc(degrees, translateValueY, imageName, className) {
         .attr("width", icon_Width_Height)
         .attr("height", icon_Width_Height)
         .attr("transform", "rotate(" + degrees + "," + (svgWidth/2) + "," + (svgHeight / 2) + ") translate(0," + translateValueY + ")");
+}
+
+function fadeInDataDiv() {
+    divData
+        .transition()
+        .delay(200)
+        .duration(1000)
+        .style("opacity", "1");
+}
+
+function fadeOutDivData() {
+    divData
+        .transition()
+        .duration(0)
+        .style("opacity", "0");
 }
